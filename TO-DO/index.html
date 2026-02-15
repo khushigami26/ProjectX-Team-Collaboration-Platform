@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
+      /* Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Courier Prime", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+      }
+
+      /* Body background */
+      body {
+        width: 100%;
+        height: 100vh;
+        background-image: url("login.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Login card */
+      .login-card {
+        width: min(440px, 90%);
+        padding: 40px;
+        border-radius: 16px;
+
+        /* glassmorphism */
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        color: #f86eb3;
+      }
+
+      /* Title */
+      .login-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 25px;
+      }
+
+      /* Input box */
+      .input-box {
+        position: relative;
+        margin-bottom: 18px;
+      }
+
+      .input-box input {
+        width: 100%;
+        padding: 18px 52px 18px 16px;
+        border-radius: 30px;
+        border: 1px solid #ff3b9e; /* dark pink */
+        background: transparent;
+        outline: none;
+        color: #f86eb3;
+        font-size: 18px;
+      }
+
+      .input-box input:focus {
+        border-color: #ff2d86;
+        box-shadow: 0 6px 18px rgba(255, 45, 134, 0.12);
+      }
+
+      .input-box input::placeholder {
+        color: rgba(248, 110, 179, 0.75);
+      }
+
+      .input-box i {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+      }
+      .input-box .eye {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        user-select: none;
+      }
+
+      /* Options */
+      .login-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+
+      .login-options label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .login-options a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .login-options a:hover {
+        text-decoration: underline;
+      }
+
+      /* Button */
+      .login-btn {
+        width: 100%;
+        padding: 18px;
+        border-radius: 30px;
+        border: none;
+        background: #f86eb3;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.18s;
+      }
+
+      .login-btn:hover {
+        filter: brightness(0.94);
+      }
+
+      /* style native checkbox color in supporting browsers */
+      input[type="checkbox"] {
+        accent-color: #f86eb3;
+      }
+
+      /* Register */
+      .register-text {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 24px;
+      }
+
+      .register-text a {
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .register-text a:hover {
+        text-decoration: underline;
+      }
+      /* Toasts */
+      .toast-container {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 9999;
+      }
+      .toast {
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        min-width: 160px;
+        max-width: 320px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(8px) scale(0.98);
+        opacity: 0;
+        transition: opacity 180ms ease, transform 180ms ease;
+        cursor: pointer;
+      }
+      .toast.show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      .toast.success {
+        background: linear-gradient(90deg, #16a34a, #22c55e);
+      }
+      .toast.error {
+        background: linear-gradient(90deg, #dc2626, #f97316);
+      }
+      .toast.info {
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+      }
+      /* Responsive (auth) */
+      @media (max-width: 600px) {
+        .login-card {
+          padding: 18px;
+        }
+        .login-title {
+          font-size: 22px;
+        }
+        .input-box input {
+          font-size: 16px;
+          padding: 12px 40px 12px 12px;
+        }
+        .login-btn {
+          font-size: 16px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="login-card">
+      <h2 class="login-title">Welcome Back !</h2>
+
+      <div class="input-box">
+        <input id="loginUsername" type="text" placeholder="Username" />
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <div class="input-box">
+        <input id="loginPassword" type="password" placeholder="Password" />
+        <span class="eye" onclick="togglePassword('loginPassword', this)"
+          >👁️</span
+        >
+      </div>
+
+      <div class="login-options">
+        <label>
+          <input type="checkbox" />
+          Remember Me
+        </label>
+        <a href="forgot.html">Forget Password?</a>
+      </div>
+
+      <button class="login-btn" onclick="loginUser()">Login</button>
+
+      <p class="register-text">
+        Don't have an account? <a href="register.html">Register</a>
+      </p>
+    </div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

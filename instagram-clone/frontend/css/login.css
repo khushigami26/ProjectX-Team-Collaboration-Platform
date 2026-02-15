@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(
+    45deg,
+    #405de6,
+    #833ab4,
+    #c13584,
+    #e1306c,
+    #fd1d1d,
+    #f56040,
+    #f77737,
+    #fcaf45
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  width: 380px;
+  border-radius: 20px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.login-box {
+  background: #ffffff;
+  text-align: center;
+  color: #222;
+  padding: 36px 34px;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.logo-text {
+  font-family: cursive;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e6f0;
+  background: #f8f9fc;
+  margin-bottom: 15px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+
+.password-wrapper .login-input {
+  padding-right: 40px;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #666;
+  font-size: 16px;
+  z-index: 2;
+}
+
+.forgot-text {
+  font-size: 12px;
+  text-align: right;
+  margin-bottom: 15px;
+  cursor: pointer;
+  color: #556;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #2d8cff;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.login-btn:hover {
+  background: #1877f2;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: #e6e6e6;
+}
+
+.divider p {
+  margin: 0 10px;
+  font-size: 12px;
+}
+
+.signup-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+
+.facebook-login {
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 30px;
+  color: #2d8cff;
+  font-weight: 600;
+}
+
+.signup-text span,
+.signup-text .link-btn {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #2d8cff;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}

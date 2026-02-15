@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble chat app - Search</title>
+    <link rel="stylesheet" href="css/search.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="search-container">
+      <header class="header">
+        <div class="header-left">
+          <a href="home.html" class="back-link">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <span>Search</span>
+        </div>
+      </header>
+
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="friendSearch" type="text" placeholder="Search friends" />
+      </div>
+
+      <div class="recent-header">
+        <span>Recent</span>
+        <button id="clearRecent" class="clear-btn" type="button">
+          Clear all
+        </button>
+      </div>
+      <div id="recentList" class="recent-list"></div>
+
+      <div id="friendsList" class="friends-list hidden"></div>
+
+      <nav class="footer-nav">
+        <a href="home.html" class="nav-link">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <a href="search.html" class="nav-link active">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <button id="addBtnBottom" class="nav-link icon-btn" title="Add">
+          <i class="fa-regular fa-square-plus"></i>
+        </button>
+        <a href="profile.html" class="nav-link">
+          <i class="fa-regular fa-user"></i>
+        </a>
+      </nav>
+    </div>
+
+    <div id="addMenu" class="add-menu hidden">
+      <div class="add-card">
+        <h3>Add</h3>
+        <button id="addStory" class="add-option">Add Story</button>
+        <button id="addPost" class="add-option">Add Post</button>
+        <button id="closeAddMenu" class="add-cancel">Cancel</button>
+      </div>
+    </div>
+
+    <input id="storyInput" type="file" accept="image/*" hidden />
+    <input id="postInput" type="file" accept="image/*" hidden />
+
+    <script src="js/toast.js"></script>
+    <script src="js/search.js"></script>
+  </body>
+</html>

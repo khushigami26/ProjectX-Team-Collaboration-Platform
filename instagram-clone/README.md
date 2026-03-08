@@ -83,5 +83,4 @@ frontend/
 2. Open the frontend pages (e.g., `frontend/home.html`) in your browser.
 
 > Backend runs at `http://localhost:5000` by default.
-# CodeAlpha_instagram_clone
-# CodeAlpha_instagram_clone
+

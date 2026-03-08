@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble chat app - Profile</title>
+    <link rel="stylesheet" href="css/user-profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="profile-container">
+      <header class="profile-header">
+        <a class="header-icons" href="search.html" title="Back">←</a>
+        <span id="profileHandle">user</span>
+        <span class="header-icons">⋯</span>
+      </header>
+
+      <section class="profile-top">
+        <div class="profile-img-wrapper">
+          <img id="profileAvatar" src="" alt="Profile" />
+        </div>
+
+        <div class="profile-stats">
+          <div>
+            <h4 id="postCount">0</h4>
+            <span>Posts</span>
+          </div>
+          <div>
+            <h4 id="followerCount">0</h4>
+            <span>Followers</span>
+          </div>
+          <div>
+            <h4 id="followingCount">0</h4>
+            <span>Following</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-bio">
+        <strong id="profileName">User</strong>
+        <div id="profileBio"></div>
+      </section>
+
+      <section class="profile-buttons">
+        <button id="followBtn" class="follow-btn">Follow</button>
+        <button id="messageBtn" class="message-btn">Message</button>
+      </section>
+
+      <section class="highlights" id="highlights">
+        <div class="highlight-item">
+          <div class="highlight-circle"></div>
+          Highlights
+        </div>
+      </section>
+
+      <section class="profile-tabs">
+        <i class="fa-solid fa-table-cells"></i>
+        <i class="fa-solid fa-play"></i>
+      </section>
+
+      <section class="post-grid" id="postGrid"></section>
+
+      <nav class="navbar">
+        <a href="home.html" class="nav-link">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <a href="search.html" class="nav-link active">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <button id="addBtnBottom" class="nav-link icon-btn" title="Add">
+          <i class="fa-regular fa-square-plus"></i>
+        </button>
+        <a href="profile.html" class="nav-link">
+          <i class="fa-regular fa-user"></i>
+        </a>
+      </nav>
+    </div>
+
+    <div id="addMenu" class="add-menu hidden">
+      <div class="add-card">
+        <h3>Add</h3>
+        <button id="addStory" class="add-option">Add Story</button>
+        <button id="addPost" class="add-option">Add Post</button>
+        <button id="closeAddMenu" class="add-cancel">Cancel</button>
+      </div>
+    </div>
+
+    <div id="connectionsModal" class="connections-overlay hidden">
+      <div class="connections-card">
+        <div class="connections-header">
+          <span id="connectionsTitle">Followers</span>
+          <button id="closeConnections" class="connections-close">×</button>
+        </div>
+        <div id="connectionsList" class="connections-list"></div>
+      </div>
+    </div>
+
+    <div id="createPostMount"></div>
+
+    <input id="storyInput" type="file" accept="image/*" hidden />
+    <input id="postInput" type="file" accept="image/*" hidden />
+
+    <div id="storyModal" class="story-modal hidden">
+      <div class="story-modal-card">
+        <button id="storyPrevBtn" class="story-nav-btn prev">‹</button>
+        <button id="storyNextBtn" class="story-nav-btn next">›</button>
+        <img id="storyModalImage" src="" alt="Story" />
+      </div>
+    </div>
+
+    <script src="js/create-post-modal.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/user-profile.js"></script>
+  </body>
+</html>

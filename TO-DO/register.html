@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
+      /* Reuse login styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Courier Prime", ui-monospace, SFMono-Regular, Menlo,
+          Monaco, "Roboto Mono", "Segoe UI Mono", monospace;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        /* Fallback background image */
+        background-image: url("login.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .login-card {
+        width: min(480px, 92%);
+        padding: 40px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        color: #f86eb3;
+      }
+      .login-title {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+      /* Register heading (two lines) */
+      .register-title {
+        text-align: center;
+        line-height: 1.05;
+        display: block;
+      }
+      .register-title .line1 {
+        display: block;
+      }
+      .register-title .line2 {
+        display: block;
+        margin-left: 0; /* centered */
+      }
+      .input-box {
+        position: relative;
+        margin-bottom: 14px;
+      }
+      .input-box input {
+        width: 100%;
+        padding: 18px 52px 18px 16px;
+        border-radius: 30px;
+        border: 1px solid #ff3b9e;
+        background: transparent;
+        outline: none;
+        color: #f86eb3;
+        font-size: 18px;
+      }
+
+      .input-box input:focus {
+        border-color: #ff2d86;
+        box-shadow: 0 6px 18px rgba(255, 45, 134, 0.12);
+      }
+      .input-box i {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+      }
+      .input-box .eye {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        user-select: none;
+      }
+      .login-btn {
+        width: 100%;
+        padding: 18px;
+        border-radius: 30px;
+        border: none;
+        background: #f86eb3;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .input-box input::placeholder {
+        color: rgba(248, 110, 179, 0.75);
+      }
+
+      .login-btn:hover {
+        filter: brightness(0.94);
+      }
+
+      input[type="checkbox"] {
+        accent-color: #f86eb3;
+      }
+      .register-text {
+        text-align: center;
+        font-size: 14px;
+        margin-top: 16px;
+      }
+      .register-text a {
+        color: white;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      /* Toasts (bottom-right) */
+      .toast-container {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        z-index: 9999;
+      }
+      .toast {
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        min-width: 160px;
+        max-width: 320px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(8px) scale(0.98);
+        opacity: 0;
+        transition: opacity 180ms ease, transform 180ms ease;
+        cursor: pointer;
+      }
+      .toast.show {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      .toast.success {
+        background: linear-gradient(90deg, #16a34a, #22c55e);
+      }
+      .toast.error {
+        background: linear-gradient(90deg, #dc2626, #f97316);
+      }
+      .toast.info {
+        background: linear-gradient(90deg, #2563eb, #60a5fa);
+      }
+      /* Responsive (auth) */
+      @media (max-width: 600px) {
+        .login-card {
+          padding: 18px;
+        }
+        .login-title {
+          font-size: 22px;
+        }
+        .input-box input {
+          font-size: 16px;
+          padding: 12px 40px 12px 12px;
+        }
+        .login-btn {
+          font-size: 16px;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-card">
+      <h2 class="login-title register-title">
+        <span class="line1">Welcome To My</span>
+        <span class="line2">To-Do App!</span>
+      </h2>
+
+      <div class="input-box">
+        <input id="regUsername" type="text" placeholder="Username" />
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <div class="input-box">
+        <input id="regEmail" type="email" placeholder="Email" />
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+
+      <div class="input-box">
+        <input id="regPassword" type="password" placeholder="Password" />
+        <span class="eye" onclick="togglePassword('regPassword', this)"
+          >👁️</span
+        >
+      </div>
+
+      <button class="login-btn" onclick="registerUser()">Register</button>
+
+      <p class="register-text">
+        Already registered? <a href="index.html">Login</a>
+      </p>
+    </div>
+
+    <script src="js/toast.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+      // Apply background: prefer user `bgImage` from localStorage, otherwise
+      // attempt to use bundled `login.jpg`. If stored image fails to load,
+      // remove it and fall back to `login.jpg` so page always shows the login
+      // background when available.
+      (function () {
+        try {
+          const bg = localStorage.getItem("bgImage");
+
+          function setBodyBg(url) {
+            document.body.style.backgroundImage = `url(${url})`;
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundRepeat = "no-repeat";
+          }
+
+          function testAndSet(url, onFail) {
+            if (!url) {
+              if (onFail) onFail();
+              return;
+            }
+            const img = new Image();
+            img.onload = function () {
+              setBodyBg(url);
+            };
+            img.onerror = function () {
+              if (onFail) onFail();
+            };
+            img.src = url;
+          }
+
+          // For the register page we always use the bundled login.jpg so it
+          // matches the login screen (ignore any custom `bgImage`).
+          if (
+            location.pathname &&
+            location.pathname.includes("register.html")
+          ) {
+            testAndSet("login.jpg");
+            return;
+          }
+
+          if (bg) {
+            // try stored background first; if it fails remove it and try login.jpg
+            testAndSet(bg, function () {
+              try {
+                localStorage.removeItem("bgImage");
+              } catch (e) {}
+              testAndSet("login.jpg");
+            });
+          } else {
+            // no stored bg — try bundled login.jpg
+            testAndSet("login.jpg");
+          }
+        } catch (e) {
+          console.error("apply background failed", e);
+        }
+      })();
+    </script>
+  </body>
+</html>

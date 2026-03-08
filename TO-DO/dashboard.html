@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>To-Do App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+
+    <script src="js/session.js"></script>
+    <script>
+      if (!isSessionValid()) location.href = "index.html";
+    </script>
+  </head>
+  <body>
+    <!-- Overlay & menu -->
+    <div id="overlay" class="overlay hidden" onclick="closeMenu()"></div>
+
+    <aside id="sideMenu" class="side-menu hidden">
+      <ul class="menu-list">
+        <li onclick="openTasks()">📋 Tasks</li>
+        <li onclick="openCalendar()">📅 Calendar</li>
+        <li onclick="openAnalytics()">📊 Overview</li>
+        <li onclick="openProfile()">👤 Profile</li>
+        <li onclick="openSettings()">⚙ Settings</li>
+        <li onclick="toggleTheme()">🌗 Theme</li>
+        <li onclick="logout()">⏻ Logout</li>
+      </ul>
+    </aside>
+
+    <!-- Top bar -->
+    <header class="top-bar">
+      <div class="left-bar">
+        <button id="backBtn" class="back-btn hidden" onclick="goBack()">
+          ⬅
+        </button>
+        <span class="menu-btn" onclick="openMenu()" style="font-size: 18px"
+          >MENU</span
+        >
+        <h3 id="pageTitle" style="font-size: 30px">🖇 My To - Do App 🖇</h3>
+      </div>
+
+      <nav class="top-nav">
+        <button class="active" onclick="openTasks(this)">🗓️ Tasks</button>
+        <button onclick="openCalendar(this)">📅 Calendar</button>
+        <button onclick="openProfile(this)">👤 Profile</button>
+      </nav>
+    </header>
+
+    <!-- Tasks -->
+    <section id="tasksScreen" class="page-container">
+      <div class="category-tabs"></div>
+
+      <ul class="task-list" id="taskList"></ul>
+
+      <!-- Floating add (Tasks) -->
+      <button class="fab" onclick="openTaskInput()">+</button>
+
+      <!-- Add task modal -->
+      <div id="taskModal" class="modal hidden" aria-hidden="true">
+        <div class="modal-content">
+          <header class="modal-header">
+            <h3>New Task</h3>
+            <button
+              type="button"
+              class="modal-close"
+              onclick="closeTaskModal()"
+            >
+              ✕
+            </button>
+          </header>
+
+          <form
+            id="taskForm"
+            class="modal-form"
+            onsubmit="event.preventDefault(); saveTaskFromModal();"
+          >
+            <div class="form-row">
+              <label for="taskTitle"
+                >Title <span style="color: var(--primary)">*</span></label
+              >
+              <input id="taskTitle" required placeholder="Task title" />
+            </div>
+
+            <div class="form-row grid-2">
+              <div>
+                <label for="taskDate">Date</label>
+                <input id="taskDate" type="date" />
+              </div>
+              <div>
+                <label for="taskTime">Time</label>
+                <input id="taskTime" type="time" />
+              </div>
+            </div>
+
+            <div class="form-row grid-2">
+              <div>
+                <label for="taskCategory">Category</label>
+                <select id="taskCategory"></select>
+              </div>
+              <div>
+                <label for="taskPriority">Priority</label>
+                <select id="taskPriority">
+                  <option>Low</option>
+                  <option selected>Medium</option>
+                  <option>High</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- color options removed -->
+
+            <div class="form-actions">
+              <button
+                type="button"
+                class="btn secondary"
+                onclick="closeTaskModal()"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn primary">Save Task</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendar -->
+    <section id="calendarScreen" class="page-container hidden">
+      <div class="calendar-header">
+        <button onclick="prevMonth()">‹</button>
+        <h3 id="calendarTitle"></h3>
+        <button onclick="nextMonth()">›</button>
+      </div>
+
+      <div class="calendar-weekdays">
+        <span>Sun</span><span>Mon</span><span>Tue</span> <span>Wed</span
+        ><span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid"></div>
+      <ul class="task-list" id="calendarTaskList"></ul>
+    </section>
+
+    <!-- Settings -->
+    <section id="settingsScreen" class="page-container hidden">
+      <div class="profile-card">
+        <h3>Settings</h3>
+
+        <div class="form-row">
+          <label for="bgImageInput">Dashboard Background</label>
+          <input
+            type="file"
+            id="bgImageInput"
+            accept="image/*"
+            onchange="setBackgroundFromFile(this)"
+          />
+        </div>
+        <div class="form-actions">
+          <button
+            type="button"
+            class="btn secondary"
+            onclick="clearBackground()"
+          >
+            Clear Background
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Analytics / Overview -->
+    <section id="analyticsScreen" class="page-container hidden">
+      <div class="profile-card">
+        <h3>Overview</h3>
+
+        <div class="overview-boxes">
+          <div
+            class="overview-box box-pending"
+            onclick="openAnalytics()"
+            role="button"
+            tabindex="0"
+          >
+            <div class="box-title">Pending Tasks</div>
+            <div class="box-count" id="overviewPendingCount">0</div>
+          </div>
+          <div
+            class="overview-box box-completed"
+            onclick="openAnalytics()"
+            role="button"
+            tabindex="0"
+          >
+            <div class="box-title">Completed Tasks</div>
+            <div class="box-count" id="overviewCompletedCount">0</div>
+          </div>
+        </div>
+
+        <div class="section" style="margin-top: 14px">
+          <div class="section-title">
+            <span>Completion of Daily Tasks</span>
+            <span id="overviewRange">Last 7 days</span>
+          </div>
+          <canvas id="overviewBarChart"></canvas>
+        </div>
+
+        <div class="section" style="margin-top: 14px">
+          <div class="section-title">
+            <span>Pending Tasks in Categories</span>
+            <span>In 30 days</span>
+          </div>
+          <div class="donut-wrapper">
+            <svg
+              id="overviewDonut"
+              width="180"
+              height="180"
+              viewBox="0 0 200 200"
+            ></svg>
+            <div class="legend" id="donutLegend"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Profile -->
+    <section id="profileScreen" class="page-container hidden">
+      <div class="profile-card">
+        <div class="profile-top">
+          <div class="profile-avatar" id="profileAvatar">👤</div>
+          <div class="profile-info">
+            <h3 id="profileName"></h3>
+            <p id="profileEmail"></p>
+          </div>
+
+          <div style="margin-left: auto">
+            <button class="btn secondary" onclick="loadProfile()">
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <form
+          class="profile-form"
+          onsubmit="event.preventDefault(); updateProfile();"
+        >
+          <div class="form-row">
+            <label for="editUsername">Username</label>
+            <input id="editUsername" placeholder="Username" />
+          </div>
+
+          <div class="form-row">
+            <label for="editEmail">Email</label>
+            <input id="editEmail" type="email" placeholder="Email" />
+          </div>
+
+          <div class="form-row">
+            <label for="oldPassword">Current Password</label>
+            <div class="password-box">
+              <input
+                id="oldPassword"
+                type="password"
+                placeholder="Current Password"
+              />
+              <span class="eye" onclick="togglePassword('oldPassword', this)"
+                >👁️</span
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="newProfilePassword">New Password</label>
+            <div class="password-box">
+              <input
+                id="newProfilePassword"
+                type="password"
+                placeholder="New Password"
+              />
+              <span
+                class="eye"
+                onclick="togglePassword('newProfilePassword', this)"
+                >👁️</span
+              >
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Save Changes</button>
+            <button
+              type="button"
+              class="btn secondary"
+              onclick="cancelProfileEdit(event)"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Floating add (moved) -->
+
+    <!-- Scripts -->
+    <script src="js/toast.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/categories.js"></script>
+    <script src="js/calendar.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/ui.js"></script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap");
+
+:root {
+  --primary: #f78fb3;
+  --primary-soft: #fde2eb;
+
+  --bg: #ffffff;
+  --surface: #ffffff;
+
+  --text-main: #111827;
+  --text-muted: #6b7280;
+
+  --border: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.12);
+}
+
+.dark {
+  --bg: #121212;
+  --surface: #1e1e1e;
+
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+
+  --border: #2d2d2d;
+  --shadow: rgba(0, 0, 0, 0.6);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+/* bg img area */
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+
+/* Load Courier Prime from Google Fonts  */
+body {
+  font-family: "Courier Prime", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    "Roboto Mono", "Segoe UI Mono", monospace;
+}
+
+/*  set custom bg image */
+.custom-bg {
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  /* keep bg fixe */
+  background-attachment: fixed !important;
+}

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble chat app - Profile</title>
+    <link rel="stylesheet" href="css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="profile-container">
+      <header class="header">
+        <div class="header-left">
+          <a class="back-link" href="home.html">
+            <i class="fa-solid fa-chevron-left"></i>
+          </a>
+          <span id="profileHandle" class="handle">@user</span>
+        </div>
+        <div class="header-icons">
+          <button id="addBtn" class="icon-btn" title="Add story or post">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+          <button id="logoutBtn" class="icon-btn" title="Logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+        </div>
+      </header>
+
+      <section class="profile-section">
+        <div class="profile-top">
+          <div class="profile-img" id="profileImageWrapper">
+            <img id="profileAvatar" src="" alt="Profile" />
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <h3 id="postCount">0</h3>
+              <p>posts</p>
+            </div>
+            <div class="stat">
+              <h3 id="followerCount">0</h3>
+              <p>followers</p>
+            </div>
+            <div class="stat">
+              <h3 id="followingCount">0</h3>
+              <p>following</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bio">
+          <div id="profileName" class="username">User</div>
+          <div class="bio-text"></div>
+          <div id="profileTag" class="tag">@user</div>
+        </div>
+
+        <div class="buttons">
+          <a href="edit-profile.html" class="btn" id="editProfileBtn">
+            Edit profile
+          </a>
+          <button class="btn" id="shareProfileBtn">Share profile</button>
+        </div>
+      </section>
+
+      <section class="story-bar" id="storySection">
+        <div class="story">
+          <div class="story-img add-story" id="addStoryBtn">+</div>
+          <div class="story-name">New</div>
+        </div>
+      </section>
+
+      <div class="tabs">
+        <i class="fa-solid fa-table-cells"></i>
+        <i class="fa-solid fa-play"></i>
+        <i class="fa-regular fa-user"></i>
+      </div>
+
+      <section class="gallery" id="gallery"></section>
+
+      <nav class="navbar">
+        <a href="home.html" class="nav-link">
+          <i class="fa-solid fa-house"></i>
+        </a>
+        <a href="search.html" class="nav-link">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+        <button id="addBtnBottom" class="nav-link icon-btn" title="Add">
+          <i class="fa-regular fa-square-plus"></i>
+        </button>
+        <a href="profile.html" class="nav-link active">
+          <i class="fa-regular fa-user"></i>
+        </a>
+      </nav>
+    </div>
+
+    <div id="addMenu" class="add-menu hidden">
+      <div class="add-card">
+        <h3>Add</h3>
+        <button id="addStory" class="add-option">Add Story</button>
+        <button id="addPost" class="add-option">Add Post</button>
+        <button id="closeAddMenu" class="add-cancel">Cancel</button>
+      </div>
+    </div>
+
+    <div id="qrModal" class="qr-overlay hidden">
+      <div class="qr-card">
+        <div class="qr-header">
+          <span>Share profile</span>
+          <button id="closeQrModal" class="qr-close">×</button>
+        </div>
+        <div class="qr-body">
+          <div id="qrName" class="qr-name"></div>
+          <canvas id="profileQrCanvas" class="qr-canvas"></canvas>
+          <div id="qrLink" class="qr-link"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="connectionsModal" class="connections-overlay hidden">
+      <div class="connections-card">
+        <div class="connections-header">
+          <span id="connectionsTitle">Followers</span>
+          <button id="closeConnections" class="connections-close">×</button>
+        </div>
+        <div id="connectionsList" class="connections-list"></div>
+      </div>
+    </div>
+
+    <div id="createPostMount"></div>
+
+    <input id="storyInput" type="file" accept="image/*" hidden />
+    <input id="postInput" type="file" accept="image/*" hidden />
+
+    <div id="storyModal" class="story-modal hidden">
+      <div class="story-modal-card">
+        <button
+          id="closeStoryModal"
+          class="story-modal-close"
+          aria-label="Close story"
+        >
+          ×
+        </button>
+        <button id="storyPrevBtn" class="story-nav-btn prev">‹</button>
+        <button id="storyNextBtn" class="story-nav-btn next">›</button>
+        <img id="storyModalImage" src="" alt="Story" />
+        <button id="deleteStoryBtn" class="story-delete">Delete</button>
+      </div>
+    </div>
+
+    <div id="profilePostModal" class="post-modal hidden">
+      <div class="post-modal-card">
+        <button id="closePostModal" class="modal-close" aria-label="Close post">
+          ×
+        </button>
+        <button id="profilePostMenuBtn" class="modal-menu-btn">⋮</button>
+        <div class="modal-user">
+          <img id="modalUserAvatar" class="modal-avatar" src="" alt="User" />
+          <div class="modal-user-meta">
+            <div id="modalUsername" class="modal-username"></div>
+            <div id="modalLocation" class="modal-meta"></div>
+            <div id="modalMusic" class="modal-meta"></div>
+          </div>
+        </div>
+        <img id="modalPostImage" class="modal-post-image" src="" alt="Post" />
+        <div id="modalPostCaption" class="modal-caption"></div>
+
+        <div
+          id="profilePostOptions"
+          class="post-options hidden"
+          aria-hidden="true"
+        >
+          <div class="post-options-card">
+            <button id="profileEditCaptionBtn" class="post-option">
+              Edit caption
+            </button>
+            <button id="profileEditLocationBtn" class="post-option">
+              Edit location
+            </button>
+            <button id="profileEditMusicBtn" class="post-option">
+              Add music
+            </button>
+            <button id="profileDeletePostBtn" class="post-option danger">
+              Delete post
+            </button>
+            <button id="profileCloseOptionsBtn" class="post-option">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/create-post-modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

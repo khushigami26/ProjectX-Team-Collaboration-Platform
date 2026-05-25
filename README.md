@@ -9,7 +9,7 @@
 - [Overview](#-overview)
 - [Key Features](#-key-features)
 - [Tech Stack](#-tech-stack)
-- [Architecture & Design](#-architecture--design)
+- [Architecture & Design](#-system-structure)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
 - [Environment Variables](#-environment-variables)
@@ -20,7 +20,7 @@
 
 ## 🎯 Overview
 
-**ProjectX** is a high-performance collaboration platform designed to streamline team workflows. Inspired by industry leaders like ProjextX and Jira, it offers a rich, interactive experience for managing boards, lists, and tasks. Built with the **MERN stack**, it features a real-time activity engine, global theme management, and enterprise-level security.
+**ProjectX** is a high-performance collaboration platform designed to streamline team workflows. Inspired by industry leaders like Trello and Jira, it offers a rich, interactive experience for managing boards, lists, and tasks. Built with the **MERN stack**, it features a real-time activity engine, global theme management, and enterprise-level security.
 
 ---
 
@@ -29,8 +29,8 @@
 | Feature | Description |
 |---|---|
 | 🔐 **Secure Authentication** | JWT-based login/register with Bcrypt password hashing |
-| 📋 **Dynamic Boards** | Create and manage horizontal ProjextX-style boards with drag-and-drop feel |
-| ⚡ **Real-time Activity** | Live tracking of all workspace actions (card additions, completions, deletions) |
+| 📋 **Dynamic Boards** | Create and manage horizontal Trello-style boards with drag-and-drop feel |
+| ⚡ **Real-time Activity** | Live tracking of all workspace actions via Socket.io |
 | 🌙 **Adaptive Theme** | One-click toggle between **Light** and **Dark** modes (persisted in local storage) |
 | 🤝 **Member Management** | Invite users to your workspace and manage roles within a unified interface |
 | 🚀 **Workspace Settings** | Toggle AI capabilities, visibility policies, and restriction levels |
@@ -43,34 +43,42 @@
 
 ## 🛠️ Tech Stack
 
-### Frontend Architecture
-- **Framework:** React 19 (via Vite 6)
-- **Styling:** Tailwind CSS v4.0 (Custom Utility Classes, Dark Mode via class variables)
-- **Routing:** React Router v7
-- **State Management:** React Context API (AuthContext, ThemeContext, UIContext)
-- **HTTP Client:** Axios (Custom interceptor instance)
-- **Icons & Typography:** Lucide React, Google Inter Font
-- **Animations:** CSS Keyframes & Tailwind Custom Variants
-- **Drag & Drop:** `@hello-pangea/dnd` for fluid task management
-- **Notifications:** `react-hot-toast` for highly customizable toast prompts
+---
 
-### Backend Architecture
-- **Runtime:** Node.js (v20+)
-- **Framework:** Express.js 4.x
-- **Database:** MongoDB Atlas with Mongoose ODM
-- **Authentication:** JSON Web Tokens (JWT) & Bcrypt.js
-- **Security:** CORS, Helmet, Rate Limiting & Environment Isolation
-- **API Structuring:** MVC Architecture (Models, Views/Routes, Controllers)
+### Frontend
 
-### Key Integrations
-- **Images:** Dynamic Unsplash backgrounds for stunning boards
-- **Data Export:** Built-in JSON data dump system for full workspace exports
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![Lucide](https://img.shields.io/badge/Lucide_React-F56565?style=for-the-badge&logo=lucide&logoColor=white)
+
+---
+
+### Backend
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Mongoose](https://img.shields.io/badge/Mongoose-880000?style=for-the-badge&logo=mongoose&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=json-web-tokens&logoColor=white)
+![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white)
+
+---
+
+### Security & Tools
+
+![Bcrypt](https://img.shields.io/badge/Bcrypt.js-FF6B6B?style=for-the-badge&logo=lock&logoColor=white)
+![CORS](https://img.shields.io/badge/CORS-FFA500?style=for-the-badge&logo=security&logoColor=white)
+![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 ---
 
 ## 🤖 System Structure
 
-**ProjectX** is architected for scalability, utilizing the **MERN** stack for high performance and **Tailwind CSS 4** for a premium, low-latency UI components.
+**ProjectX** is architected for scalability, utilizing the **MERN** stack for high performance and **Tailwind CSS 4** for a premium, low-latency UI.
 
 | Component | Responsibility |
 |---|---|
@@ -78,6 +86,7 @@
 | ✅ **Theme Context** | Handles global Light/Dark mode state and transitions |
 | ✅ **UI Context** | Centralized confirmation modals and interactive global elements |
 | ✅ **Activity Logger** | Backend utility for tracking workspace-wide interactions |
+| ✅ **Socket.io Engine** | Real-time event broadcasting for live updates |
 
 ---
 
@@ -115,8 +124,8 @@ Project_Management/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/khushigami262/ProjectX.git
-cd Project_Management
+git clone https://github.com/khushigami26/CodeAlpha_Tasks.git
+cd CodeAlpha_Tasks/Project_Management
 ```
 
 ### 2. Backend Setup
@@ -169,10 +178,10 @@ Visit: **http://localhost:5173** (Vite default port)
 
 1. Push your repository to GitHub.
 2. Log in to [Render](https://render.com).
-3. Create a **New Static Site** for the `frontend/` (or use a mono-repo config).
+3. Create a **New Static Site** for the `frontend/` (build command: `npm run build`, publish dir: `dist`).
 4. Create a **New Web Service** for the `backend/`.
 5. Configuration:
-   - **Root Directory**: `backend`
+   - **Root Directory**: `Project_Management/backend`
    - **Build Command**: `npm install`
    - **Start Command**: `node server.js`
 6. Add Environment Variables in the Render dashboard (Settings -> Environment).
@@ -181,22 +190,31 @@ Visit: **http://localhost:5173** (Vite default port)
 
 ## 📸 Screenshots
 
-| View | Features |
-|---|---|
-| 🏠 **Boards View** | Grid view of all projects with dynamic cards and trash icons. |
-| 🛡️ **Activity Feed** | Global workspace history with user avatars and timestamps. |
-| 📋 **Project Board** | Horizontal lists, task cards with color labels, and status checks. |
-| 👤 **User Profile** | Cover photo customization, 2FA settings, and password reset. |
-| 🌙 **Dark Mode** | Full dark-themed immersion for night-time productivity. |
-| 📤 **Export Panel** | Professional icons and download options for data migration. |
+<table>
+  <tr>
+    <td><img src="frontend/screenshots/ss1.jpg" alt="Screenshot 1" width="100%"/></td>
+    <td><img src="frontend/screenshots/ss2.jpg" alt="Screenshot 2" width="100%"/></td>
+  </tr>
+  <tr>
+    <td><img src="frontend/screenshots/ss3.jpg" alt="Screenshot 3" width="100%"/></td>
+    <td><img src="frontend/screenshots/ss4.jpg" alt="Screenshot 4" width="100%"/></td>
+  </tr>
+  <tr>
+    <td><img src="frontend/screenshots/ss5.jpg" alt="Screenshot 5" width="100%"/></td>
+    <td><img src="frontend/screenshots/ss6.jpg" alt="Screenshot 6" width="100%"/></td>
+  </tr>
+  <tr>
+    <td><img src="frontend/screenshots/ss7.jpg" alt="Screenshot 7" width="100%"/></td>
+    <td><img src="frontend/screenshots/ss8.jpg" alt="Screenshot 8" width="100%"/></td>
+  </tr>
+</table>
 
 ---
 
-## 👩💻 Author
+## 👩‍💻 Author
 
-**Khushi** — [@khushigami262](https://github.com/khushigami262)
-
+**Khushi** — [@khushigami26](https://github.com/khushigami26)
 
 ---
 
-<p align="center">🚀 Built with using MERN Stack & Tailwind CSS 4</p>
+<p align="center">🚀 Built using MERN Stack & Tailwind CSS 4</p>

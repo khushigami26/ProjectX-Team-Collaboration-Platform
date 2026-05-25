@@ -40,3 +40,6 @@ backend/.env
 frontend/.env
 frontend/dist/
 backend/dist/
+uploads/
+backend/uploads/
+frontend/uploads/

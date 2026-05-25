@@ -1,4 +1,4 @@
-# Render service definition for ProjectX (frontend + backend)
+# Render service definition for ProjectX (backend only)
 services:
   - type: web
     name: projectx-backend
@@ -14,18 +14,7 @@ services:
       - key: PORT
         sync: false
 
-  - type: static
-    name: projectx-frontend
-    env: static
-    plan: free
-    buildCommand: cd frontend && npm ci && npm run build
-    publishPath: frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        sync: false
-
 # Notes:
 # - On Render, set the actual values for MONGO_URI and JWT_SECRET in the service's Environment
 #   settings (do NOT commit secrets to the repo).
-# - Set `VITE_API_URL` to your backend URL (e.g. https://projectx-backend.onrender.com/api) after
-#   the backend service is live so the frontend can call the API.
+# - If you later want to host the frontend on Render, add a static service or deploy it separately (Vercel is a good alternative).
